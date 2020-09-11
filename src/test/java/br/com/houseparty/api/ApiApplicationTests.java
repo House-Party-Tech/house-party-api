@@ -1,10 +1,10 @@
-package br.com.api.houseparty;
+package br.com.houseparty.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HousepartyApplicationTests {
+class ApiApplicationTests {
 
 	@Test
 	void contextLoads() {

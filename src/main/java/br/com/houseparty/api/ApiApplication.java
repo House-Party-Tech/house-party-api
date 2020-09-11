@@ -1,13 +1,13 @@
-package br.com.api.houseparty;
+package br.com.houseparty.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HousepartyApplication {
+public class ApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HousepartyApplication.class, args);
+		SpringApplication.run(ApiApplication.class, args);
 	}
 
 }
