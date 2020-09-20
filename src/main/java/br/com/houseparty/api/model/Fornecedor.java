@@ -3,7 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Tableable(name="fornecedor")
+@Table(name="fornecedor")
 public class Fornecedor extends Usuario{
 
 	private Produto produto;

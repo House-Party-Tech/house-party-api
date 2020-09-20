@@ -1,4 +1,6 @@
 package br.com.houseparty.api.model;
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +16,7 @@ public class Pedido {
 	private Entregador id_entregador;
 	private int qtd_produto;
 	private long id_pedido;
-	private Date dt_compra;
+	private Calendar dt_compra;
 	private String tipo_entrega;
 
 }

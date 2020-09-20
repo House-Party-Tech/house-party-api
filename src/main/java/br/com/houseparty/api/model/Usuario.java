@@ -71,12 +71,6 @@ public class Usuario {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public Date getDt_cadastro() {
-		return dt_cadastro;
-	}
-	public void setDt_cadastro(Date dt_cadastro) {
-		this.dt_cadastro = dt_cadastro;
-	}
 	
 	
 	
