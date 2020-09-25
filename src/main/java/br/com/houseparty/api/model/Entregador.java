@@ -7,17 +7,14 @@ import javax.persistence.Table;
 @Table(name="entregador")
 public class Entregador extends Usuario{
 
-	private Conta conta_bancaria;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Entregador() {}
 
-	public Conta getConta_bancaria() {
-		return conta_bancaria;
-	}
-
-	public void setConta_bancaria(Conta conta_bancaria) {
-		this.conta_bancaria = conta_bancaria;
-	}
 	
 	
 }

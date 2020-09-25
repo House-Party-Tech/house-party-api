@@ -1,18 +1,25 @@
 package br.com.houseparty.api.model;
 
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Usuario {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Usuario implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue
 	private long id;
