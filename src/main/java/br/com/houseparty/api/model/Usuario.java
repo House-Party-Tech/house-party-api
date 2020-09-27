@@ -1,9 +1,5 @@
 package br.com.houseparty.api.model;
 
-<<<<<<< HEAD
-import java.io.Serializable;
-=======
->>>>>>> 55f4850d7c19d1344f4e0bf6afaa43938622af6d
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -18,19 +14,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-<<<<<<< HEAD
-public abstract class Usuario implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-=======
 public class Usuario {
 
-
->>>>>>> 55f4850d7c19d1344f4e0bf6afaa43938622af6d
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id_usuario;

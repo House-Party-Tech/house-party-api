@@ -9,13 +9,6 @@ import javax.persistence.Table;
 @Table(name="fornecedor")
 public class Fornecedor extends Usuario{
 
-<<<<<<< HEAD
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-=======
 	@Column(name="CNPJ")
 	private String cnpj;
 	@ManyToOne
@@ -32,7 +25,5 @@ public class Fornecedor extends Usuario{
 		this.cnpj = cnpj;
 	}
 
-	
->>>>>>> 55f4850d7c19d1344f4e0bf6afaa43938622af6d
 	
 }
