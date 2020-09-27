@@ -1,10 +1,15 @@
 package br.com.houseparty.api.model;
 
+<<<<<<< HEAD
 import java.io.Serializable;
+=======
+>>>>>>> 55f4850d7c19d1344f4e0bf6afaa43938622af6d
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,6 +18,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+<<<<<<< HEAD
 public abstract class Usuario implements Serializable{
 
 	/**
@@ -20,19 +26,44 @@ public abstract class Usuario implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+=======
+public class Usuario {
+
+
+>>>>>>> 55f4850d7c19d1344f4e0bf6afaa43938622af6d
 	@Id
-	@GeneratedValue
-	private long id;
-	private String nome;
-	private String email;
-	private String inscricao; 
-	private String telefone;
-	private String senha;
-	private String nome_usuario;
-	private Endereco endereco;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id_usuario;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="NOME")
+	private String nome;
+	@Column(name="EMAIL")
+	private String email;
+	@Column(name="TELEFONE")
+	private String telefone;
+	@Column(name="SENHA")
+	private String senha;
+	@Column(name="NOME_USUARIO")
+	private String nome_usuario;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="DT_NASCIMENTO")
+	private Calendar dt_nascimento;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="DT_CADASTRO")
 	private Calendar dt_cadastro;
+	
+	public Usuario(String nome, String email, String telefone, String senha, String nome_usuario, Calendar dt_nascimento) {
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.senha = senha;
+		this.nome_usuario = nome_usuario;
+		this.dt_nascimento = dt_nascimento;
+		
+		this.dt_cadastro = Calendar.getInstance();
+	}
 	
 	public Usuario() {}
 	
@@ -47,12 +78,6 @@ public abstract class Usuario implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getInscricao() {
-		return inscricao;
-	}
-	public void setInscricao(String inscricao) {
-		this.inscricao = inscricao;
 	}
 	public String getTelefone() {
 		return telefone;
@@ -71,12 +96,6 @@ public abstract class Usuario implements Serializable{
 	}
 	public void setNome_usuario(String nome_usuario) {
 		this.nome_usuario = nome_usuario;
-	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 	
 	
