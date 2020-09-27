@@ -1,31 +1,30 @@
 package br.com.houseparty.api.model;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="fornecedor")
 public class Fornecedor extends Usuario{
 
-	private Produto produto;
-	private Conta conta_bancaria;
+	@Column(name="CNPJ")
+	private String cnpj;
+	@ManyToOne
+	@JoinColumn(name="ENDERECO")
+	private Endereco endereco;
 	
 	public Fornecedor() {}
 
-	public Produto getProduto() {
-		return produto;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
-	public Conta getConta_bancaria() {
-		return conta_bancaria;
-	}
-
-	public void setConta_bancaria(Conta conta_bancaria) {
-		this.conta_bancaria = conta_bancaria;
-	}
 	
 	
 }
