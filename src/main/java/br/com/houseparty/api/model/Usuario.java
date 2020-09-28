@@ -29,7 +29,7 @@ public class Usuario {
 	@Column(name="SENHA")
 	private String senha;
 	@Column(name="NOME_USUARIO")
-	private String nome_usuario;
+	private String usuario;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="DT_NASCIMENTO")
@@ -44,7 +44,7 @@ public class Usuario {
 		this.email = email;
 		this.telefone = telefone;
 		this.senha = senha;
-		this.nome_usuario = nome_usuario;
+		this.usuario = nome_usuario;
 		this.dt_nascimento = dt_nascimento;
 		
 		this.dt_cadastro = Calendar.getInstance();
@@ -77,10 +77,10 @@ public class Usuario {
 		this.senha = senha;
 	}
 	public String getNome_usuario() {
-		return nome_usuario;
+		return usuario;
 	}
 	public void setNome_usuario(String nome_usuario) {
-		this.nome_usuario = nome_usuario;
+		this.usuario = nome_usuario;
 	}
 	
 	
