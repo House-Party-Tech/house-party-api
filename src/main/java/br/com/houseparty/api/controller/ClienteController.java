@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,10 +32,11 @@ public class ClienteController {
 	}
 	
 	
-	@GetMapping("/")
+	@GetMapping("/") 
 	public List<Cliente> getClientes() {
 		return clienteRepositorio.findAll();
 	}
+	
 	
 	@GetMapping("/{id}")
 	public Optional<Cliente> getClienteById(@PathVariable("id") Long tantofaz) {
@@ -41,7 +44,7 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/autenticacao")
-	public ResponseEntity autenticacaoCliente(@RequestParam("usuario") String usuario, @RequestParam("senha") String senha) {
+	public ResponseEntity<Map<String, String>> autenticacaoCliente(@RequestParam("usuario") String usuario, @RequestParam("senha") String senha) {
 		
 		List<Cliente> pesquisa = clienteRepositorio.findByUsuarioAndSenha(usuario, senha);
 		
@@ -52,7 +55,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/cadastro")
-	public ResponseEntity cadastroCliente(@RequestBody Cliente cliente) {	
+	public ResponseEntity<Map<String, String>> cadastroCliente(@RequestBody Cliente cliente) {	
 		
 		List<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getNome_usuario());
 		List<Cliente> email = clienteRepositorio.findByEmail(cliente.getEmail());
@@ -66,6 +69,30 @@ public class ClienteController {
 			return new ResponseEntity<>(resposta("Resposta","Salvo com sucesso!"), HttpStatus.CREATED);
 		}
 	
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Map<String, String>> deletarCliente(@PathVariable Long id) {
+		Optional<Cliente> pesquisa = clienteRepositorio.findById(id);
+		
+		if(pesquisa.isEmpty())
+			return new ResponseEntity<>(resposta("Resposta", "id não encontrado"), HttpStatus.NOT_FOUND);
+		
+		clienteRepositorio.deleteById(id);
+		return new ResponseEntity<>(resposta("Resposta", "Id " + id + " excluido com sucesso"), HttpStatus.OK);
+	}
+	
+	@PutMapping("/atualizar/{id}")
+	public Optional<Object> atualizaCliente(@RequestBody Cliente atualizacao, @PathVariable Long id) {
+	    return clienteRepositorio.findById(id).map(cliente -> {
+	    	        cliente.setNome(atualizacao.getNome());
+	    	        cliente.setEmail(atualizacao.getEmail());
+	    	        cliente.setNome_usuario(atualizacao.getNome_usuario());
+	    	        cliente.setSenha(atualizacao.getSenha());
+	    	        cliente.setTelefone(atualizacao.getTelefone());
+	    	        cliente.setCpf(atualizacao.getCpf());
+	    	        return clienteRepositorio.save(cliente);
+	    	      });
 	}
 	
 	private Map<String, String> resposta(String titulo_resposta, String resposta) {
