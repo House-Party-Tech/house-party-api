@@ -1,4 +1,4 @@
-package br.com.houseparty.api.model;
+package br.com.houseparty.api.model.cliente;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

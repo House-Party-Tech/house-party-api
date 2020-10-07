@@ -11,18 +11,12 @@ public class ApiApplication {
 	}
 	
 	/*@Bean
-	CommandLineRunner init(UsuarioRepositorio repository) {
+	CommandLineRunner init(ProdutoRepositorio repository) {
 		return args -> {
 			repository.deleteAll();
-			LongStream.range(1, 2)
+			LongStream.range(1, 10)
 					.mapToObj(i -> {
-						Cliente c = new Cliente();
-						c.setCpf("111111111");
-						c.setEmail("teste@teste.com");
-						c.setNome("teste");
-						c.setNome_usuario("teste Usuario");
-						c.setSenha("123");
-						c.setTelefone("40028922");
+						Produto c = new Produto("000000000", "produto");
 						return c;
 					})
 					.map(v -> repository.save(v))

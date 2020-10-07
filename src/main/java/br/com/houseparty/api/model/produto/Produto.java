@@ -1,0 +1,69 @@
+package br.com.houseparty.api.model.produto;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PRODUTO")
+public class Produto {
+
+	@Id
+	@GeneratedValue
+	@Column(name = "ID_PRODUTO")
+	private Long id_produto;
+	
+	@Column(name = "EAN", nullable = false)
+	private String ean;
+	
+	@Column(name = "DESCRICAO", nullable = false)
+	private String descricao;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
+	
+
+
+	public Produto() {}
+	
+	public Produto(String ean, String descricao) {
+		this.setEan(ean);
+		this.setDescricao(descricao);
+	}
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	public Long getId_produto() {
+		return id_produto;
+	}
+	public void setId_produto(Long id_produto) {
+		this.id_produto = id_produto;
+	}
+	public String getEan() {
+		return ean;
+	}
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+}

@@ -1,6 +1,8 @@
-package br.com.houseparty.api.model;
+package br.com.houseparty.api.model.cliente;
+
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,39 +20,47 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id_usuario;
+	private Long id_usuario; // Primary key
 	
-	@Column(name="NOME")
-	private String nome;
-	@Column(name="EMAIL")
-	private String email;
-	@Column(name="TELEFONE")
+	@Column(name="NOME", nullable = false)
+	private String nome; 
+	@Column(name="EMAIL", nullable = false)
+	private String email; 
+	@Column(name="TELEFONE", nullable = true)
 	private String telefone;
-	@Column(name="SENHA")
+	@Column(name="SENHA", nullable = false)
 	private String senha;
-	@Column(name="NOME_USUARIO")
+	@Column(name="NOME_USUARIO", nullable = false)
 	private String usuario;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="DT_NASCIMENTO")
-	private Calendar dt_nascimento;
+	@Column(name="DT_NASCIMENTO", nullable = true)
+	private Date dt_nascimento;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="DT_CADASTRO")
 	private Calendar dt_cadastro;
 	
-	public Usuario(String nome, String email, String telefone, String senha, String nome_usuario, Calendar dt_nascimento) {
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-		this.senha = senha;
-		this.usuario = nome_usuario;
-		this.dt_nascimento = dt_nascimento;
+	public Usuario(String nome, String email, String telefone, String senha, String nome_usuario, Date dt_nascimento) {
+		this.setNome(nome);
+		this.setEmail(email);
+		this.setTelefone(telefone);
+		this.setSenha(senha);
+		this.setNome_usuario(nome_usuario);
+		this.setDtNascimento(dt_nascimento);
 		
 		this.dt_cadastro = Calendar.getInstance();
 	}
 	
 	public Usuario() {}
+	
+	public Date getDtNascimento() {
+		return this.dt_nascimento;
+	}
+	
+	public void setDtNascimento(Date dt_nascimento) {
+		this.dt_nascimento = dt_nascimento;
+	}
 	
 	public String getNome() {
 		return nome;

@@ -3,9 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.houseparty.api.model.Cliente;
+
+import br.com.houseparty.api.model.cliente.Cliente;
 import br.com.houseparty.api.repositorios.ClienteRepositorio;
 
 
@@ -43,6 +41,16 @@ public class ClienteController {
 		return clienteRepositorio.findById(tantofaz);
 	}
 	
+	@GetMapping("/{nome}")
+	public List<Cliente> retornaPorNome(@PathVariable("nome") String nome) {
+		return clienteRepositorio.findByNome(nome);
+	}
+	
+	@GetMapping("/{email}")
+	public List<Cliente> retornaPorEmail(@PathVariable("email") String email){
+		return clienteRepositorio.findByEmail(email);
+	}
+	
 	@GetMapping("/autenticacao")
 	public ResponseEntity<Map<String, String>> autenticacaoCliente(@RequestParam("usuario") String usuario, @RequestParam("senha") String senha) {
 		
@@ -51,7 +59,6 @@ public class ClienteController {
 		if(pesquisa.isEmpty())
 			return new ResponseEntity<>(resposta("Resposta", "Usuario ou senha invalida"),HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(resposta("Resposta", "Ok"),HttpStatus.ACCEPTED);
-		
 	}
 	
 	@PostMapping("/cadastro")
@@ -91,7 +98,8 @@ public class ClienteController {
 	    	        cliente.setSenha(atualizacao.getSenha());
 	    	        cliente.setTelefone(atualizacao.getTelefone());
 	    	        cliente.setCpf(atualizacao.getCpf());
-	    	        return clienteRepositorio.save(cliente);
+	    	        clienteRepositorio.save(cliente);
+	    	        return new ResponseEntity<>(resposta("Resposta", "Usuário alterado com sucesso!"), HttpStatus.OK);
 	    	      });
 	}
 	

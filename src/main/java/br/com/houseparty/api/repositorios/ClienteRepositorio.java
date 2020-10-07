@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import br.com.houseparty.api.model.Cliente;
+
+import br.com.houseparty.api.model.cliente.Cliente;
 
 @Repository
 public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
@@ -21,4 +22,5 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
     
     @Query(value = "select * from Cliente f where f.nome_usuario = :usuario and f.email = :email", nativeQuery = true)
     List<Cliente> findByUsuarioAndEmail(@Param("usuario") String usuario, @Param("email") String email);
+    
 }

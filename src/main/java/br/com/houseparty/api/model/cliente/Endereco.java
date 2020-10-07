@@ -1,4 +1,4 @@
-package br.com.houseparty.api.model;
+package br.com.houseparty.api.model.cliente;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,31 +13,28 @@ public class Endereco {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_ENDERECO") 
+	@Column(name="ID_ENDERECO", nullable = false) 
 	private long id_endereco;
 	
-	@Column(name="CEP")
+	@Column(name="CEP", nullable = false)
 	private String cep;
-	@Column(name="CIDADE")
+	@Column(name="CIDADE", nullable = false)
 	private String cidade;
-	@Column(name="PAIS")
+	@Column(name="PAIS", nullable = false)
 	private String pais;
-	@Column(name="RUA")
-	private String rua;
-	@Column(name="LOGRADOURO")
+	@Column(name="LOGRADOURO", nullable = false)
 	private String logradouro;
-	@Column(name="BAIRRO")
+	@Column(name="BAIRRO", nullable = false)
 	private String bairro;
 	
 	public Endereco() {}
 	
 	public Endereco(String logradouro, String cidade, String pais, String rua, String bairro, String cep) {
-		this.logradouro = logradouro;
-		this.cidade = cidade;
-		this.pais = pais;
-		this.rua = rua;
-		this.bairro = bairro;
-		this.cep = cep;
+		this.setLogradouro(logradouro);
+		this.setCidade(cidade);
+		this.setPais(pais);
+		this.setBairro(bairro);
+		this.setCep(cep);
 	}
 	
 	public String getCep() {
@@ -57,12 +54,6 @@ public class Endereco {
 	}
 	public void setPais(String pais) {
 		this.pais = pais;
-	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
 	}
 	public String getLogradouro() {
 		return logradouro;
