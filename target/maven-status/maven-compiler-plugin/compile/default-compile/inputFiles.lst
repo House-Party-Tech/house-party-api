@@ -1,0 +1,16 @@
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\controller\ProdutoController.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\repositorios\ClienteRepositorio.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\produto\Categoria_produto.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\controller\CategoriaController.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\repositorios\ProdutoRepositorio.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\produto\Categoria.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\repositorios\CategoriaProdutoRepositorio.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\cliente\Endereco.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\cliente\Fornecedor.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\cliente\Entregador.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\cliente\Usuario.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\repositorios\CategoriaRepositorio.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\produto\Produto.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\model\cliente\Cliente.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\controller\ClienteController.java
+E:\DEV\house-party-api\src\main\java\br\com\houseparty\api\ApiApplication.java
