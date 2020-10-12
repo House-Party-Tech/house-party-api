@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +23,7 @@ public class Categoria {
 	public Categoria(String descricao) {
 		this.setDescricao(descricao);
 	}
+	
 	
 	public Long getId_categoria() {
 		return id_categoria;

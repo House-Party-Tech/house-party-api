@@ -1,21 +1,20 @@
 package br.com.houseparty.api.model.cliente;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Usuario{
 
-	@Column(name="CPF", nullable = false)
+	@Column(name="CPF", nullable = true)
 	private String cpf;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="ENDERECO_ID_ENDERECO")
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="ID_ENDERECO")
 	private Endereco endereco;
 	
 	
@@ -26,13 +25,6 @@ public class Cliente extends Usuario{
 		this.setEndereco(endereco);
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 
 	public Cliente() {}
 
@@ -42,5 +34,13 @@ public class Cliente extends Usuario{
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 }

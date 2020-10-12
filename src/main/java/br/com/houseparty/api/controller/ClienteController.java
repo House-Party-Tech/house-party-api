@@ -64,11 +64,11 @@ public class ClienteController {
 	@PostMapping("/cadastro")
 	public ResponseEntity<Map<String, String>> cadastroCliente(@RequestBody Cliente cliente) {	
 		
-		List<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getNome_usuario());
+		List<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getUsuario());
 		List<Cliente> email = clienteRepositorio.findByEmail(cliente.getEmail());
 		
 		if(!usuario.isEmpty()) {
-			return new ResponseEntity<>(resposta("Resposta", "usuario '" + cliente.getNome_usuario() + "' já cadastrado"), HttpStatus.CONFLICT);
+			return new ResponseEntity<>(resposta("Resposta", "usuario '" + cliente.getUsuario() + "' já cadastrado"), HttpStatus.CONFLICT);
 		}else if(!email.isEmpty()) {
 			return new ResponseEntity<>(resposta("Resposta","Email '" + cliente.getEmail() + "' já cadastrado"), HttpStatus.CONFLICT);
 		} else {
@@ -94,7 +94,7 @@ public class ClienteController {
 	    return clienteRepositorio.findById(id).map(cliente -> {
 	    	        cliente.setNome(atualizacao.getNome());
 	    	        cliente.setEmail(atualizacao.getEmail());
-	    	        cliente.setNome_usuario(atualizacao.getNome_usuario());
+	    	        cliente.setUsuario(atualizacao.getUsuario());
 	    	        cliente.setSenha(atualizacao.getSenha());
 	    	        cliente.setTelefone(atualizacao.getTelefone());
 	    	        cliente.setCpf(atualizacao.getCpf());

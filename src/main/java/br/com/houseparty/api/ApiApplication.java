@@ -1,7 +1,14 @@
 package br.com.houseparty.api;
 
+import java.util.stream.LongStream;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import br.com.houseparty.api.model.produto.Categoria;
+import br.com.houseparty.api.repositorios.CategoriaRepositorio;
 
 @SpringBootApplication
 public class ApiApplication {
@@ -11,16 +18,16 @@ public class ApiApplication {
 	}
 	
 	/*@Bean
-	CommandLineRunner init(ProdutoRepositorio repository) {
+	CommandLineRunner init(CategoriaRepositorio repositorio) {
 		return args -> {
-			repository.deleteAll();
-			LongStream.range(1, 10)
-					.mapToObj(i -> {
-						Produto c = new Produto("000000000", "produto");
-						return c;
-					})
-					.map(v -> repository.save(v))
-					.forEach(System.out::println);
+			repositorio.deleteAll();
+			LongStream.range(1, 11)
+				.mapToObj(i -> {
+					Categoria cat = new Categoria("categoria " + i);
+					return cat;
+				})
+				.map(v -> repositorio.save(v))
+				.forEach(System.out::println);
 		};
 	}*/
 
