@@ -24,10 +24,6 @@ public class Categoria {
 		this.setDescricao(descricao);
 	}
 	
-	
-	public Long getId_categoria() {
-		return id_categoria;
-	}
 	public void setId_categoria(Long id_categoria) {
 		this.id_categoria = id_categoria;
 	}

@@ -15,4 +15,6 @@ public interface ProdutoRepositorio extends JpaRepository<Produto, Long>{
     List<Produto> findByDescricaoAndCategoria(@Param("descricao") String descricao, @Param("categoria") Categoria categoria);
     
     List<Produto> findByDescricao(String descricao);
+    List<Produto> findByCategoria(Categoria categoria);
+    
 }
