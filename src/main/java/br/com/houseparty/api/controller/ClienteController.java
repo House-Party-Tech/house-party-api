@@ -30,24 +30,24 @@ public class ClienteController {
 	}
 	
 	
-	@GetMapping("/") 
+	@GetMapping
 	public List<Cliente> getClientes() {
 		return clienteRepositorio.findAll();
 	}
-	
+		
 	
 	@GetMapping("/{id}")
-	public Optional<Cliente> getClienteById(@PathVariable("id") Long tantofaz) {
-		return clienteRepositorio.findById(tantofaz);
+	public Optional<Cliente> getClienteById(@RequestParam("id") Long id) {
+		return clienteRepositorio.findById(id);
 	}
 	
 	@GetMapping("/{nome}")
-	public List<Cliente> retornaPorNome(@PathVariable("nome") String nome) {
+	public List<Cliente> retornaPorNome(@RequestParam("nome") String nome) {
 		return clienteRepositorio.findByNome(nome);
 	}
 	
 	@GetMapping("/{email}")
-	public List<Cliente> retornaPorEmail(@PathVariable("email") String email){
+	public List<Cliente> retornaPorEmail(@RequestParam("email") String email){
 		return clienteRepositorio.findByEmail(email);
 	}
 	
