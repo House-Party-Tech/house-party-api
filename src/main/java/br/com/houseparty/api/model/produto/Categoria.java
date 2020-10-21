@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +25,9 @@ public class Categoria {
 	
 	public void setId_categoria(Long id_categoria) {
 		this.id_categoria = id_categoria;
+	}
+	public Long getId_categoria(){
+		return id_categoria;
 	}
 	public String getDescricao() {
 		return descricao;
