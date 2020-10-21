@@ -17,7 +17,7 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 	
-	/*@Bean
+	@Bean
 	CommandLineRunner init(CategoriaRepositorio repositorio) {
 		return args -> {
 			repositorio.deleteAll();
@@ -29,6 +29,6 @@ public class ApiApplication {
 				.map(v -> repositorio.save(v))
 				.forEach(System.out::println);
 		};
-	}*/
+	}
 
 }

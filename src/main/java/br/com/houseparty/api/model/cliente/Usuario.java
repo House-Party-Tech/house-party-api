@@ -23,7 +23,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id; // Primary key
+	private Long id_usuario; // Primary key
 	
 	@Column(name="NOME", nullable = true)
 	private String nome; 
@@ -58,11 +58,11 @@ public class Usuario {
 	public Usuario() {}
 	
 	public Long getId_usuario() {
-		return id;
+		return id_usuario;
 	}
 
 	public void setId_usuario(Long id_usuario) {
-		this.id = id_usuario;
+		this.id_usuario = id_usuario;
 	}
 
 	public String getUsuario() {
