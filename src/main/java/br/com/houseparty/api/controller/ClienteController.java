@@ -29,25 +29,28 @@ public class ClienteController {
 		this.clienteRepositorio = usuarioRepositorio;
 	}
 	
-	
 	@GetMapping
 	public List<Cliente> getClientes() {
 		return clienteRepositorio.findAll();
 	}
 		
 	
-	@GetMapping("/{id}")
-	public Optional<Cliente> getClienteById(@RequestParam("id") Long id) {
-		return clienteRepositorio.findById(id);
+	@GetMapping("/id/{id}")
+	public ResponseEntity<?> getClienteById(@PathVariable("id") Long id) {
+		Optional<Cliente> cliente = clienteRepositorio.findById(id);
+		if(cliente.isEmpty()) {
+			return new ResponseEntity<>("Id não encontrado", HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(cliente, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{nome}")
-	public List<Cliente> retornaPorNome(@RequestParam("nome") String nome) {
+	@GetMapping("/nome/{nome}")
+	public List<Cliente> retornaPorNome(@PathVariable("nome") String nome) {
 		return clienteRepositorio.findByNome(nome);
 	}
 	
-	@GetMapping("/{email}")
-	public List<Cliente> retornaPorEmail(@RequestParam("email") String email){
+	@GetMapping("/email/{email}")
+	public List<Cliente> retornaPorEmail(@PathVariable("email") String email){
 		return clienteRepositorio.findByEmail(email);
 	}
 	

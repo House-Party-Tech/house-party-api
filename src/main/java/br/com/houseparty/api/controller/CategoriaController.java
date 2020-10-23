@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.houseparty.api.model.cliente.Cliente;
 import br.com.houseparty.api.model.produto.Categoria;
+import br.com.houseparty.api.model.produto.Produto;
 import br.com.houseparty.api.repositorios.CategoriaRepositorio;
 import br.com.houseparty.api.repositorios.ProdutoRepositorio;
 
@@ -24,35 +25,37 @@ import br.com.houseparty.api.repositorios.ProdutoRepositorio;
 @RequestMapping({"/categoria"})
 public class CategoriaController {
 
-	private CategoriaRepositorio repositorio;
+	private CategoriaRepositorio categoriaRepositorio;
+	private ProdutoRepositorio produtoRepositorio;
 	
-	CategoriaController(CategoriaRepositorio repositorio){
-		this.repositorio = repositorio;
+	CategoriaController(CategoriaRepositorio categoriaRepositorio, ProdutoRepositorio produtoRepositorio){
+		this.categoriaRepositorio = categoriaRepositorio;
+		this.produtoRepositorio = produtoRepositorio;
 	}
 	
 	@GetMapping
 	public List<Categoria> getCategorias(){
-		return repositorio.findAll();
+		return categoriaRepositorio.findAll();
 	}
 	
-	@GetMapping({"id"})
+	@GetMapping("/{id}")
 	public Optional<Categoria> buscar(@PathVariable("id") Long id) {
-		return repositorio.findById(id);
+		return categoriaRepositorio.findById(id);
 	}
 	
 	@PostMapping("/cadastrar")
 	public void inserirCategoria(@RequestBody Categoria categoria) {
-		List<Categoria> existeCategoria = repositorio.findByDescricao(categoria.getDescricao()); 
+		List<Categoria> existeCategoria = categoriaRepositorio.findByDescricao(categoria.getDescricao()); 
 		
 		if(existeCategoria.isEmpty()) {
-			repositorio.save(categoria);
+			categoriaRepositorio.save(categoria);
 		}
 
 	}
 	
 	@PutMapping("/atualizar/{id}")
 	public Optional<Object> atualizaCliente(@RequestBody Categoria atualizacao, @PathVariable Long id) {
-	    return repositorio.findById(id).map(categoria -> {
+	    return categoriaRepositorio.findById(id).map(categoria -> {
 	  
 	        categoria.setDescricao(atualizacao.getDescricao());
 	        return new ResponseEntity<>("Categoria alterada com sucesso!", HttpStatus.OK);
@@ -60,14 +63,21 @@ public class CategoriaController {
 	    }
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity deletarCategoria(@PathVariable Long id) {
-		Optional<Categoria> pesquisa = repositorio.findById(id);
+	public ResponseEntity<String> deletarCategoria(@PathVariable Long id) {
+		Optional<Categoria> pesquisa = categoriaRepositorio.findById(id);
+		List<Produto> pesquisaProduto = produtoRepositorio.findByCategoria(pesquisa.get());
 		
-		if(pesquisa.isEmpty())
+		if(pesquisa.isEmpty()) {
 			return new ResponseEntity<>("id não encontrado", HttpStatus.NOT_FOUND);
-		
-		repositorio.deleteById(id);
-		return new ResponseEntity<>( "Id " + id + " excluido com sucesso", HttpStatus.OK);
+		}else if(!pesquisaProduto.isEmpty()) {
+			return new ResponseEntity<>("Id procurado esta linkado a um produto (Exclua ou altere sua categoria)", HttpStatus.CONFLICT);
+		}else {
+			categoriaRepositorio.deleteById(id);
+			return new ResponseEntity<>( "Id " + id + " excluido com sucesso", HttpStatus.OK);
+		}
+			
+
+
 	}
 }
 	
