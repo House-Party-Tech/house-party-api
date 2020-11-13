@@ -11,7 +11,7 @@ import br.com.houseparty.api.model.produto.Produto;
 
 public interface ProdutoRepositorio extends JpaRepository<Produto, Long>{
 	
-    @Query(value = "select * from Produto f where f.descricao = :descricao and f.categoria_id_categoria = :categoria", nativeQuery = true)
+    @Query(value = "select * from produto f where f.descricao = :descricao and f.categoria_id_categoria = :categoria", nativeQuery = true)
     List<Produto> findByDescricaoAndCategoria(@Param("descricao") String descricao, @Param("categoria") Categoria categoria);
     
     List<Produto> findByDescricao(String descricao);
