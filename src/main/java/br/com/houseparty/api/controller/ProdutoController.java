@@ -41,7 +41,7 @@ public class ProdutoController {
 	public ResponseEntity<?> buscarPorId(@PathVariable("id") Long id) {
 		
 		Optional<Produto> produto = produtoRepositorio.findById(id);
-		if(produto.isEmpty())
+		if(!produto.isPresent())
 			return new ResponseEntity<>("Produto não encontrado", HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<>(produto, HttpStatus.OK);
@@ -104,7 +104,7 @@ public class ProdutoController {
 	public ResponseEntity<?> deletarProduto(@PathVariable Long id) {
 		Optional<Produto> pesquisa = produtoRepositorio.findById(id);
 		
-		if(pesquisa.isEmpty())
+		if(!pesquisa.isPresent())
 			return new ResponseEntity<>("id não encontrado", HttpStatus.NOT_FOUND);
 		
 		produtoRepositorio.deleteById(id);

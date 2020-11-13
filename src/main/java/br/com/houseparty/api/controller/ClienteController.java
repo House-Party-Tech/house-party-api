@@ -38,7 +38,7 @@ public class ClienteController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getClienteById(@PathVariable("id") Long id) {
 		Optional<Cliente> cliente = clienteRepositorio.findById(id);
-		if(cliente.isEmpty()) {
+		if(!cliente.isPresent()) {
 			return new ResponseEntity<>("Id não encontrado", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(cliente, HttpStatus.OK);
@@ -85,7 +85,7 @@ public class ClienteController {
 	public ResponseEntity<Map<String, String>> deletarCliente(@PathVariable Long id) {
 		Optional<Cliente> pesquisa = clienteRepositorio.findById(id);
 		
-		if(pesquisa.isEmpty())
+		if(!pesquisa.isPresent())
 			return new ResponseEntity<>(resposta("Resposta", "id não encontrado"), HttpStatus.NOT_FOUND);
 		
 		clienteRepositorio.deleteById(id);
