@@ -41,7 +41,7 @@ public class ProdutoController {
 	public ResponseEntity<?> buscarPorId(@PathVariable("id") Long id) {
 		
 		Optional<Produto> produto = produtoRepositorio.findById(id);
-		if(produto.isEmpty())
+		if(!produto.isPresent())
 			return new ResponseEntity<>("Produto não encontrado", HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<>(produto, HttpStatus.OK);
@@ -57,19 +57,23 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/categoria")
-	public ResponseEntity<?> buscarPorCategoria(@RequestParam(value = "categoria") String categoria){
-		List<Categoria> categorias = categoriaRepositorio.findByDescricao(categoria);
+	public ResponseEntity<?> buscarPorCategoria(@RequestParam(value = "categoria") Long idCategoria){
+		Optional<Categoria> categoria = categoriaRepositorio.findById(idCategoria);
 
-		List<Produto> produtos =  produtoRepositorio.findByCategoria(categorias.get(0));
-		
-		if(produtos.isEmpty())
-			return new ResponseEntity<>("Produtos não encontrados", HttpStatus.NOT_FOUND);
-		return new ResponseEntity<>(produtos, HttpStatus.OK);
+		if (categoria.isPresent()) {
+			List<Produto> produtos = produtoRepositorio.findByCategoria(categoria.get());
+			if(produtos.isEmpty()) {
+				return new ResponseEntity<>("Produtos não encontrados", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(produtos, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Categria não encontrada", HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@PostMapping("/cadastro")
 	public ResponseEntity<String> cadastroProduto(@RequestBody Produto produto) {
-		
+
 		List<Categoria> teste = categoriaRepositorio.findByDescricao(produto.getCategoria().getDescricao());
 		
 		if(!teste.isEmpty()) {
@@ -104,7 +108,7 @@ public class ProdutoController {
 	public ResponseEntity<?> deletarProduto(@PathVariable Long id) {
 		Optional<Produto> pesquisa = produtoRepositorio.findById(id);
 		
-		if(pesquisa.isEmpty())
+		if(!pesquisa.isPresent())
 			return new ResponseEntity<>("id não encontrado", HttpStatus.NOT_FOUND);
 		
 		produtoRepositorio.deleteById(id);

@@ -67,7 +67,7 @@ public class CategoriaController {
 		Optional<Categoria> pesquisa = categoriaRepositorio.findById(id);
 		List<Produto> pesquisaProduto = produtoRepositorio.findByCategoria(pesquisa.get());
 		
-		if(pesquisa.isEmpty()) {
+		if(!pesquisa.isPresent()) {
 			return new ResponseEntity<>("id não encontrado", HttpStatus.NOT_FOUND);
 		}else if(!pesquisaProduto.isEmpty()) {
 			return new ResponseEntity<>("Id procurado esta linkado a um produto (Exclua ou altere sua categoria)", HttpStatus.CONFLICT);
