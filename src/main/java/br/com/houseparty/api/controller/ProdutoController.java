@@ -1,5 +1,6 @@
 package br.com.houseparty.api.controller;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -114,5 +115,18 @@ public class ProdutoController {
 		produtoRepositorio.deleteById(id);
 		return new ResponseEntity<>("Produto " + pesquisa.get().getDescricao() +", Id " + id + " excluido com sucesso", HttpStatus.OK);
 	}
+	
+	@GetMapping("/imagem/{id}")
+	public ResponseEntity<?> buscarImagem(@PathVariable Long id){
+		Optional<Produto> pesquisa = produtoRepositorio.findById(id);
+		
+		if(!pesquisa.isPresent()) {
+			String imagem64 = pesquisa.get().getImagemProduto();
+			return new ResponseEntity<>(imagem64, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("Id não encontrado", HttpStatus.NOT_FOUND);
+	}
+	
 	
 }

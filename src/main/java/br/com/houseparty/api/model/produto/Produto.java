@@ -1,11 +1,14 @@
 package br.com.houseparty.api.model.produto;
 
+import java.util.Base64;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,6 +33,10 @@ public class Produto {
 	@ManyToOne
 	private Categoria categoria;
 	
+	@Lob
+	@Column(name= "IMAGEM", nullable = false)
+	private String imagemProduto;
+	
 	public Produto() {}
 	
 	public Produto(String ean, String descricao) {
@@ -37,6 +44,14 @@ public class Produto {
 		this.setDescricao(descricao);
 	}
 	
+	public String getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(String imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
