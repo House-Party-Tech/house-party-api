@@ -29,7 +29,7 @@ public class Endereco {
 	
 	public Endereco() {}
 	
-	public Endereco(String logradouro, String cidade, String pais, String rua, String bairro, String cep) {
+	public Endereco(String logradouro, String cidade, String pais, String bairro, String cep) {
 		this.setLogradouro(logradouro);
 		this.setCidade(cidade);
 		this.setPais(pais);

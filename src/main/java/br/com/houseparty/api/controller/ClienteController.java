@@ -50,7 +50,7 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/email/{email}")
-	public List<Cliente> retornaPorEmail(@PathVariable("email") String email){
+	public Optional<Cliente> retornaPorEmail(@PathVariable("email") String email){
 		return clienteRepositorio.findByEmail(email);
 	}
 	
@@ -68,11 +68,11 @@ public class ClienteController {
 	public ResponseEntity<Map<String, String>> cadastroCliente(@RequestBody Cliente cliente) {	
 		
 		List<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getUsuario());
-		List<Cliente> email = clienteRepositorio.findByEmail(cliente.getEmail());
+		Optional<Cliente> email = clienteRepositorio.findByEmail(cliente.getEmail());
 		
 		if(!usuario.isEmpty()) {
 			return new ResponseEntity<>(resposta("Resposta", "usuario '" + cliente.getUsuario() + "' já cadastrado"), HttpStatus.CONFLICT);
-		}else if(!email.isEmpty()) {
+		} else if(email.isPresent()) {
 			return new ResponseEntity<>(resposta("Resposta","Email '" + cliente.getEmail() + "' já cadastrado"), HttpStatus.CONFLICT);
 		} else {
 			clienteRepositorio.save(cliente);
