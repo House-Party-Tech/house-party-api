@@ -15,7 +15,9 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long> {
 	
 	List<Cliente> findByNome(String nome);
 	
-	List<Cliente> findByUsuario(String usuario);
+    @Query(value = "select * from cliente f where f.nome_usuario = :usuario", nativeQuery = true)
+	Optional<Cliente> findByUsuario(@Param("usuario") String usuario);
+
 	Optional<Cliente> findByEmail(String email);
 	
     @Query(value = "select * from cliente f where f.nome_usuario = :usuario and f.senha = :senha", nativeQuery = true)

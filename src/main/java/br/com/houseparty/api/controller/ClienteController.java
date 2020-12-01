@@ -53,7 +53,12 @@ public class ClienteController {
 	public Optional<Cliente> retornaPorEmail(@PathVariable("email") String email){
 		return clienteRepositorio.findByEmail(email);
 	}
-	
+
+	@GetMapping("/usuario")
+	public Optional<Cliente> retornaPorNomeUsuario(@RequestParam("usuario") String usuario) {
+		return clienteRepositorio.findByUsuario(usuario);
+	}
+
 	@GetMapping("/autenticacao")
 	public ResponseEntity<Map<String, String>> autenticacaoCliente(@RequestParam("usuario") String usuario, @RequestParam("senha") String senha) {
 		
@@ -67,10 +72,10 @@ public class ClienteController {
 	@PostMapping("/cadastro")
 	public ResponseEntity<Map<String, String>> cadastroCliente(@RequestBody Cliente cliente) {	
 		
-		List<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getUsuario());
+		Optional<Cliente> usuario = clienteRepositorio.findByUsuario(cliente.getUsuario());
 		Optional<Cliente> email = clienteRepositorio.findByEmail(cliente.getEmail());
 		
-		if(!usuario.isEmpty()) {
+		if(usuario.isPresent()) {
 			return new ResponseEntity<>(resposta("Resposta", "usuario '" + cliente.getUsuario() + "' já cadastrado"), HttpStatus.CONFLICT);
 		} else if(email.isPresent()) {
 			return new ResponseEntity<>(resposta("Resposta","Email '" + cliente.getEmail() + "' já cadastrado"), HttpStatus.CONFLICT);
